@@ -1,0 +1,56 @@
+﻿@page "/vehicleoverview"
+@inherits VehicleOverviewBase
+
+<h1 class="page-title">All vehicle</h1>
+
+<p>@Message</p>
+
+@if (Vehicles == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                @*<th></th>*@
+                <th>Vehicle ID</th>
+                <th>Model</th>
+                <th>Registration number</th>
+                <th>Production Year</th>
+                <th>Load capacity</th>
+                <th>Coordinate X</th>
+                <th>Coordinate Y</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vehicle in Vehicles)
+            {
+                <tr>
+                    @*<td><img width="30" src="/images/professional.png" class="rounded-circle" /></td>*@
+                    <td>@vehicle.Id</td>
+                    <td>@vehicle.Model</td>
+                    <td>@vehicle.RegistrationNumber</td>
+                    <td>@vehicle.ProductionYear</td>
+                    <td>@vehicle.LoadCapacity</td>
+                    <td>@vehicle.CurrentX</td>
+                    <td>@vehicle.CurrentY</td>
+                    <td>
+                       @* <a href="@($"employeedetail/{vehicle.Id}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-info-circle"></i>
+                        </a>*@
+                        <a href="@($"vehicleedit/{vehicle.Id}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@*<button @onclick="QuickAddEmployee" class="btn btn-dark table-btn quick-add-btn">&nbsp;&nbsp;+&nbsp;&nbsp;</button>
+
+<AddEmployeeDialog @ref="AddEmployeeDialog" CloseEventCallback="@AddEmployeeDialog_OnDialogClose"></AddEmployeeDialog>*@

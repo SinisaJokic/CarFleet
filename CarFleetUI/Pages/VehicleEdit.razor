@@ -1,0 +1,70 @@
+﻿@page "/vehicleedit"
+@page "/vehicleedit/{VehicleId}"
+@inherits VehicleEditBase
+@using CarFleetModels
+
+    <section class="employee-edit">
+        @if (!Saved)
+        {
+            <h1 class="page-title">Details</h1>
+
+            <br>
+            <EditForm Model="@Vehicle" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+                <ObjectGraphDataAnnotationsValidator />
+
+                <div class="form-group row">
+                    <label for="model" class="col-sm-3">Model: </label>
+                    <InputText id="model" class="form-control col-sm-8" @bind-Value="@Vehicle.Model" placeholder="Enter model"></InputText>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Vehicle.Model)" />
+                </div>
+                <div class="form-group row">
+                    <label for="registrationNumber" class="col-sm-3">Registration number: </label>
+                    <InputText id="registrationNumber" class="form-control col-sm-8" @bind-Value="@Vehicle.RegistrationNumber" placeholder="Enter registration number"></InputText>
+                    <ValidationMessage For="@(() => Vehicle.RegistrationNumber)" />
+                </div>
+                <div class="form-group row">
+                    <label for="productionYear" class="col-sm-3">Production year: </label>
+                    <InputNumber id="productionYear" class="form-control col-sm-8" @bind-Value="@Vehicle.ProductionYear" placeholder="Enter production year number"></InputNumber>
+                    <ValidationMessage For="@(() => Vehicle.ProductionYear)" />
+                </div>
+                <div class="form-group row">
+                    <label for="loadCapacity" class="col-sm-3">Load capacity: </label>
+                    <InputNumber id="loadCapacity" class="form-control col-sm-8" @bind-Value="@Vehicle.LoadCapacity" placeholder="Enter load capacity"></InputNumber>
+                    <ValidationMessage For="@(() => Vehicle.LoadCapacity)" />
+                </div>
+                <div class="form-group row">
+                    <label for="currentX" class="col-sm-3">Current X position: </label>
+                    <InputNumber id="currentX" class="form-control col-sm-8" @bind-Value="@Vehicle.CurrentX" placeholder="Enter X position"></InputNumber>
+                    <ValidationMessage For="@(() => Vehicle.CurrentX)" />
+                </div>
+                <div class="form-group row">
+                    <label for="currentY" class="col-sm-3">Current Y position: </label>
+                    <InputNumber id="currentY" class="form-control col-sm-8" @bind-Value="@Vehicle.CurrentY" placeholder="Enter Y position"></InputNumber>
+                    <ValidationMessage For="@(() => Vehicle.CurrentY)" />
+                </div>
+                <div class="form-group row">
+                    <label for="description" class="col-sm-3">Description: </label>
+                    <InputText id="description" class="form-control col-sm-8" @bind-Value="@Vehicle.Description" placeholder="Enter description"></InputText>
+                    <ValidationMessage For="@(() => Vehicle.Description)" />
+                </div>
+
+                <br>
+                
+                <button type="submit" class="btn btn-primary edit-btn">Save vehicle</button>
+                @*<a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToOverview">Cancel</a>*@
+                @if (Vehicle.Id > 0)
+                {
+                    <a class="btn btn-danger" @onclick="@DeleteVehicle">
+                        Delete
+                    </a>
+                }
+            </EditForm>
+
+        }
+        else
+        {
+            <div class="alert @StatusClass">@Message</div>
+            @*<a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>*@
+
+        }
+    </section>

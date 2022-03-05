@@ -1,0 +1,27 @@
+﻿@page "/maps"
+@inject IJSRuntime JS
+@using Microsoft.JSInterop
+
+
+
+<h3>Map</h3>
+
+<div id="viewDiv" style="padding: 0; margin: 0; height: 1000px; width: 100%"></div>
+
+@code {
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("initializeMap", null);
+
+            StateHasChanged();
+        }
+
+    }
+}
+
+
+

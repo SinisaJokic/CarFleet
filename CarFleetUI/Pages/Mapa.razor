@@ -1,0 +1,21 @@
+﻿@page "/mapa"
+@inject IJSRuntime JSRuntime
+
+<h1 class="page-title">Mapa</h1>
+
+<div id="viewDiv"></div>
+
+@code
+{
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("RenderMapa", null);
+        }
+    }
+}
+
+
+
+
