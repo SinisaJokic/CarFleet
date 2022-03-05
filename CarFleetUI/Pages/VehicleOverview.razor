@@ -22,6 +22,7 @@ else
                 <th>Load capacity</th>
                 <th>Coordinate X</th>
                 <th>Coordinate Y</th>
+                <th>Actions</th>
                 <th></th>
             </tr>
         </thead>
@@ -38,11 +39,11 @@ else
                     <td>@vehicle.CurrentX</td>
                     <td>@vehicle.CurrentY</td>
                     <td>
-                       @* <a href="@($"employeedetail/{vehicle.Id}")" class="btn btn-primary table-btn">
-                            <i class="fas fa-info-circle"></i>
-                        </a>*@
                         <a href="@($"vehicleedit/{vehicle.Id}")" class="btn btn-primary table-btn">
                             <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="@($"maps/{vehicle.Id}")" class="btn btn-success table-btn">
+                            <i class="far fa-eye"></i>
                         </a>
                     </td>
                 </tr>

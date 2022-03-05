@@ -1,6 +1,6 @@
 ﻿
 
-function initializeMap() {
+function initializeMap(la , lo) {
     require([
         "esri/config",
         "esri/WebMap",
@@ -48,8 +48,8 @@ function initializeMap() {
 
         const point = { //Create a point
             type: "point",
-            longitude: 16.455558,
-            latitude: 43.511508
+            longitude: lo,
+            latitude: la
         };
         const simpleMarkerSymbol = {
             type: "simple-marker",

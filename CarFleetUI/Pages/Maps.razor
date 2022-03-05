@@ -1,4 +1,6 @@
 ﻿@page "/maps"
+@page "/maps/{VehicleId}"
+@inherits MapBase
 @inject IJSRuntime JS
 @using Microsoft.JSInterop
 
@@ -8,20 +10,39 @@
 
 <div id="viewDiv" style="padding: 0; margin: 0; height: 1000px; width: 100%"></div>
 
-@code {
+@*@code {
 
+    [Inject]
+    public CarFleetUI.Services.IVehicleService VehicleService { get; set; }
+    
+    [Parameter]
+    public string VehicleId { get; set; }
+
+    public CarFleetModels.Vehicle Vehicle { get; set; } = new CarFleetModels.Vehicle();
+
+    protected override async Task OnInitializedAsync()
+        {
+           
+            int.TryParse(VehicleId, out var vehicleId);
+
+            if (vehicleId != 0) //new employee is being created
+            {
+                Vehicle = await VehicleService.GetVehicleDetails(int.Parse(VehicleId));
+            }
+        }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+
         if (firstRender)
         {
-            await JS.InvokeVoidAsync("initializeMap", null);
+            await JS.InvokeVoidAsync("initializeMap", 43.5115 , 16.4555);
 
             StateHasChanged();
         }
 
     }
-}
+}*@
 
 
 

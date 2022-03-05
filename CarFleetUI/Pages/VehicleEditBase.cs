@@ -21,9 +21,9 @@ namespace CarFleetUI.Pages
         {
             Saved = false;
 
-            int.TryParse(VehicleId, out var employeeId);
+            int.TryParse(VehicleId, out var vehicleId);
 
-            if (employeeId != 0) //new employee is being created
+            if (vehicleId != 0) //new employee is being created
             {
                 Vehicle = await VehicleService.GetVehicleDetails(int.Parse(VehicleId));
             }
