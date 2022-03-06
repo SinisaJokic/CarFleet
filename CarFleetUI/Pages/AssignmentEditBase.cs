@@ -22,6 +22,8 @@ namespace CarFleetUI.Pages
         {
             VehicleId = 1,
             FromDate = DateTime.Now,
+            DriverId = 1,
+            ToDate = DateTime.Now
         };
         public string Message { get; set; }
         protected string StatusClass = string.Empty;
