@@ -3,16 +3,18 @@ using System;
 using CarFleetAPI.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CarFleetAPI.Migrations
+namespace CarFleetAPI.Migrations.DriverInfo
 {
     [DbContext(typeof(VehicleInfoContext))]
-    partial class VehicleInfoContextModelSnapshot : ModelSnapshot
+    [Migration("20220306104042_VehicleAssign")]
+    partial class VehicleAssign
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.2");

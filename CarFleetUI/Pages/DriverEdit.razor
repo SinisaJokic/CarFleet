@@ -1,0 +1,74 @@
+﻿@page "/driveredit"
+@page "/driveredit/{DriverId}"
+@inherits DriverEditBase
+@using CarFleetModels
+
+    <section class="employee-edit">
+        @if (!Saved)
+        {
+            <h1 class="page-title">Details</h1>
+
+            <br>
+            <EditForm Model="@Driver" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+                <ObjectGraphDataAnnotationsValidator />
+
+                <div class="form-group row">
+                    <label for="model" class="col-sm-3">First name: </label>
+                    <InputText id="model" class="form-control col-sm-8" @bind-Value="@Driver.FirstName" placeholder="Enter first name"></InputText>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Driver.FirstName)" />
+                </div>
+                <div class="form-group row">
+                    <label for="registrationNumber" class="col-sm-3">Last name: </label>
+                    <InputText id="registrationNumber" class="form-control col-sm-8" @bind-Value="@Driver.LastName" placeholder="Enter last name"></InputText>
+                    <ValidationMessage For="@(() => Driver.LastName)" />
+                </div>
+                <div class="form-group row">
+                    <label for="birthdate" class="col-sm-3">Birthdate: </label>
+                    <InputDate id="birthdate" class="form-control col-sm-8" @bind-Value="@Driver.BirthDate" placeholder="Enter birthdate"></InputDate>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Driver.BirthDate)" />
+                </div>
+                <div class="form-group row">
+                    <label for="street" class="col-sm-3">Street: </label>
+                    <InputText id="street" class="form-control col-sm-8" @bind-Value="@Driver.Street" placeholder="Enter street"></InputText>
+                    <ValidationMessage For="@(() => Driver.Street)" />
+                </div>
+                <div class="form-group row">
+                    <label for="city" class="col-sm-3">City: </label>
+                    <InputText id="city" class="form-control col-sm-8" @bind-Value="@Driver.City" placeholder="Enter city"></InputText>
+                    <ValidationMessage For="@(() => Driver.City)" />
+                </div>
+                <div class="form-group row">
+                    <label for="phoneNumber" class="col-sm-3">Phone number: </label>
+                    <InputText id="phoneNumber" class="form-control col-sm-8" @bind-Value="@Driver.PhoneNumber" placeholder="Enter phone number"></InputText>
+                    <ValidationMessage For="@(() => Driver.PhoneNumber)" />
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3">Email: </label>
+                    <InputText id="email" class="form-control col-sm-8" @bind-Value="@Driver.Email" placeholder="Enter email"></InputText>
+                    <ValidationMessage For="@(() => Driver.Email)" />
+                </div>
+                <div class="form-group row">
+                    <label for="description" class="col-sm-3">Last name: </label>
+                    <InputText id="description" class="form-control col-sm-8" @bind-Value="@Driver.Description" placeholder="Enter description"></InputText>
+                    <ValidationMessage For="@(() => Driver.Description)" />
+                </div>
+                <br>
+                
+                <button type="submit" class="btn btn-primary edit-btn">Save driver</button>
+                @*<a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToOverview">Cancel</a>*@
+                @if (Driver.Id > 0)
+                {
+                    <a class="btn btn-danger" @onclick="@DeleteDriver">
+                        Delete
+                    </a>
+                }
+            </EditForm>
+
+        }
+        else
+        {
+            <div class="alert @StatusClass">@Message</div>
+            @*<a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>*@
+
+        }
+    </section>

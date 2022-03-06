@@ -14,6 +14,10 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddHttpClient<IVehicleService, VehicleService>(client =>
     client.BaseAddress = new Uri("https://localhost:7228/"));
+builder.Services.AddHttpClient<IDriverService, DriverService>(client =>
+    client.BaseAddress = new Uri("https://localhost:7228/"));
+builder.Services.AddHttpClient<IAssignmentService, AssignmentService>(client =>
+    client.BaseAddress = new Uri("https://localhost:7228/"));
 
 
 var app = builder.Build();

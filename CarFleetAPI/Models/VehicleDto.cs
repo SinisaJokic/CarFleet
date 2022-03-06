@@ -10,5 +10,7 @@
         public decimal? CurrentX { get; set; }
         public decimal? CurrentY { get; set; }
         public string? Description { get; set; }
+
+
     }
 }

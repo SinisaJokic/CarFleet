@@ -15,7 +15,7 @@ namespace CarFleetAPI.Services
 
         public async Task<IEnumerable<Vehicle>> GetVehiclesAsync()
         {
-            return await _context.Vehicles.OrderBy(c => c.Model).ToListAsync();
+            return await _context.Vehicles.OrderBy(c => c.Id).ToListAsync();
         }
 
         public async Task<Vehicle?> GetVehicleAsync(int vehicleId)

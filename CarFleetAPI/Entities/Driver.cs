@@ -3,29 +3,32 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarFleetAPI.Entities
 {
-    public class Vehicle
+    public class Driver
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         [MaxLength(50)]
-        public string Model { get; set; }
+        public string FirstName { get; set; }
         [Required]
         [MaxLength(50)]
-        public string? RegistrationNumber { get; set; }
-        public int? ProductionYear { get; set; }
-        public int? LoadCapacity { get; set; }
-        public decimal? CurrentX { get; set; }
-        public decimal? CurrentY { get; set; }
+        public string LastName { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string? Street { get; set; }
+        public string? City { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? Email { get; set; }
         public string? Description { get; set; }
 
         public ICollection<VehicleAssign> VehicleAssign { get; set; }
                = new List<VehicleAssign>();
 
-        public Vehicle(string model)
-        {
-            Model = model;
-        }
+
+        //public Driver(string firstname, string lastname)
+        //{
+        //    FirstName = firstname;
+        //    LastName = lastname;
+        //}
     }
 }

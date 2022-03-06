@@ -1,0 +1,57 @@
+﻿@page "/driveoverview"
+@inherits DriverOverviewBase
+
+<h1 class="page-title">All drivers</h1>
+
+<p>@Message</p>
+
+@if (Drivers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                @*<th></th>*@
+                <th>Driver ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Birth date</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>PhoneNumber</th>
+                <th>Actions</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var driver in Drivers)
+            {
+                <tr>
+                    @*<td><img width="30" src="/images/professional.png" class="rounded-circle" /></td>*@
+                    <td>@driver.Id</td>
+                    <td>@driver.FirstName</td>
+                    <td>@driver.LastName</td>
+                    <td>@driver.BirthDate</td>
+                    <td>@driver.Street</td>
+                    <td>@driver.City</td>
+                    <td>@driver.PhoneNumber</td>
+                    <td>
+                        <a href="@($"driveredit/{driver.Id}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                       @* <a href="@($"maps/{vehicle.Id}")" class="btn btn-success table-btn">
+                            <i class="far fa-eye"></i>
+                        </a>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@*<button @onclick="QuickAddEmployee" class="btn btn-dark table-btn quick-add-btn">&nbsp;&nbsp;+&nbsp;&nbsp;</button>
+
+<AddEmployeeDialog @ref="AddEmployeeDialog" CloseEventCallback="@AddEmployeeDialog_OnDialogClose"></AddEmployeeDialog>*@

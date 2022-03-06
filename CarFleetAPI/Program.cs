@@ -38,6 +38,9 @@ builder.Services.AddDbContext<VehicleInfoContext>(
 //builder.Configuration["ConnectionStrings:VehicleInfoDBConnectionString"]));
 
 builder.Services.AddScoped<IVehicleInfoRepository, VehicleInfoRepository>();
+builder.Services.AddScoped<IDriverInfoRepository, DriverInfoRepository>();
+builder.Services.AddScoped<IVehicleAssignRepository, VehicleAssignRepository>();
+
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

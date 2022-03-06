@@ -1,0 +1,76 @@
+﻿@page "/vehicleassignedit"
+@*@page "/driveredit/{DriverId}"*@
+@inherits AssignmentEditBase
+@using CarFleetModels
+
+    <section class="employee-edit">
+        @if (!Saved)
+        {
+            <h1 class="page-title">Assignment</h1>
+
+            <br>
+            <EditForm Model="@VehicleAssign" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+                <ObjectGraphDataAnnotationsValidator />
+
+                <div class="form-group row">
+                    <label for="name" class="col-sm-3">Name: </label>
+                    <InputText id="name" class="form-control col-sm-8" @bind-Value="@VehicleAssign.Name" placeholder="Enter name"></InputText>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => VehicleAssign.Name)" />
+                </div>
+                <div class="form-group row">
+                    <label for="fromdate" class="col-sm-3">From date: </label>
+                    <InputDate id="fromdate" class="form-control col-sm-8" @bind-Value="@VehicleAssign.FromDate" placeholder="Enter from date"></InputDate>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => VehicleAssign.FromDate)" />
+                </div>
+                <div class="form-group row">
+                    <label for="todate" class="col-sm-3">To date: </label>
+                    <InputDate id="todate" class="form-control col-sm-8" @bind-Value="@VehicleAssign.ToDate" placeholder="Enter to date"></InputDate>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => VehicleAssign.ToDate)" />
+                </div>
+                <div class="form-group row">
+                    <label for="vehicleid" class="col-sm-3">Vehicle: </label>
+                    <CustomInputSelect id="vehicleid" class="form-control col-sm-8" @bind-Value="@VehicleAssign.VehicleId" >
+                        @foreach (var vehicle in AllVehicle)
+                        {
+                            <option value="@vehicle.Id">
+                                @vehicle.RegistrationNumber
+                            </option>
+                        }
+                    </CustomInputSelect>
+                </div>
+                <div class="form-group row">
+                    <label for="driverid" class="col-sm-3">Driver: </label>
+                    <CustomInputSelect id="driverid" class="form-control col-sm-8" @bind-Value="@VehicleAssign.DriverId" >
+                        @foreach (var driver in AllDriver)
+                        {
+                            <option value="@driver.Id">
+                                @driver.FirstName @driver.LastName
+                            </option>
+                        }
+                    </CustomInputSelect>
+                </div>
+                <div class="form-group row">
+                    <label for="description" class="col-sm-3">Description: </label>
+                    <InputText id="description" class="form-control col-sm-8" @bind-Value="@VehicleAssign.Description" placeholder="Enter description"></InputText>
+                    <ValidationMessage For="@(() => VehicleAssign.Description)" />
+                </div>
+                <br>
+                
+                <button type="submit" class="btn btn-primary edit-btn">Save assignment</button>
+                @*<a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToOverview">Cancel</a>*@
+                @*@if (Driver.Id > 0)
+                {
+                    <a class="btn btn-danger" @onclick="@DeleteDriver">
+                        Delete
+                    </a>
+                }*@
+            </EditForm>
+
+        }
+        else
+        {
+            <div class="alert @StatusClass">@Message</div>
+            @*<a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>*@
+
+        }
+    </section>
