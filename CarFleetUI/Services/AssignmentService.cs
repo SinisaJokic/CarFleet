@@ -49,7 +49,7 @@ namespace CarFleetUI.Services
                 return await JsonSerializer.DeserializeAsync<VehicleAssign>(await response.Content.ReadAsStreamAsync());
             }
 
-            return null;
+                return null;
         }
 
         public async Task UpdateVehicleAssign(VehicleAssign vehicleAssign)

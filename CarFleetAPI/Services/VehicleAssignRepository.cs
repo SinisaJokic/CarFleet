@@ -15,7 +15,10 @@ namespace CarFleetAPI.Services
 
         public async Task<IEnumerable<VehicleAssign>> GetVehicleAssignAsync()
         {
-            return await _context.VehicleAssign.OrderBy(c => c.Id).ToListAsync();
+            return await _context.VehicleAssign
+                .Include(v=> v.Vehicle)
+                .Include(d=> d.Driver)
+                .OrderBy(c => c.Id).ToListAsync();
         }
 
         public async Task<VehicleAssign?> GetVehicleAssignAsync(int vehicleAssignId)
@@ -44,5 +47,18 @@ namespace CarFleetAPI.Services
         {
             return (await _context.SaveChangesAsync() >= 0);
         }
+        public async Task<bool> ExistsVehicleDriverDateAsync(int vehicleid,int driverid,DateTime datefrom,DateTime dateto)
+        {
+            return await _context.VehicleAssign.AnyAsync(c => c.VehicleId == vehicleid &&  c.DriverId==driverid &&
+                ((c.FromDate > datefrom && c.FromDate > dateto) || (c.FromDate < datefrom && c.FromDate < dateto)));
+        }
+        //public async Task<VehicleAssign?> GetVehicleDriverDataAsync(int vehicleid, int driverid, DateTime datefrom, DateTime dateto)
+        //{
+
+        //    return await _context.VehicleAssign
+        //          .Where(c => c.VehicleId == vehicleid &&  c.DriverId==driverid &&
+        //            ((c.FromDate > datefrom && c.FromDate > dateto) || (c.FromDate < datefrom && c.FromDate < dateto))) 
+        //          .FirstOrDefaultAsync();
+        //}
     }
 }

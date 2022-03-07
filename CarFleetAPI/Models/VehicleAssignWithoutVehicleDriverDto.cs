@@ -2,7 +2,7 @@
 
 namespace CityInfo.API.Models
 {
-    public class VehicleAssignDto
+    public class VehicleAssignWithoutVehicleDriverDto
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
@@ -11,9 +11,6 @@ namespace CityInfo.API.Models
         public string? Description { get; set; }
         public int VehicleId { get; set; }
         public int DriverId { get; set; }
-        public string RegistrationNumber { get; set; }
-
-        public string Driver { get; set; }
 
     }
 }

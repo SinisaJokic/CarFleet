@@ -42,9 +42,14 @@ namespace CarFleetAPI.Controllers
             return Ok(_mapper.Map<VehicleAssignDto>(vehicleAssign));
         }
         [HttpPost]
-        public async Task<ActionResult<VehicleAssignDto>> CreateVehicleAssign(VehicleAssignDto vehicleAssign)
+        public async Task<ActionResult<VehicleAssignDto>> CreateVehicleAssign(VehicleAssignWithoutVehicleDriverDto vehicleAssign)
         {
             //if (!await _vehicleInfoRepository.VehicleExistsAsync(Id))
+            //{
+            //    return NotFound();
+            //}
+            //if (await _vehicleAssignInfoRepository.ExistsVehicleDriverDateAsync(vehicleAssign.VehicleId,vehicleAssign.DriverId,
+            //        vehicleAssign.FromDate,vehicleAssign.ToDate))
             //{
             //    return NotFound();
             //}
@@ -67,7 +72,7 @@ namespace CarFleetAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateVehicleAssign(int id, VehicleAssignDto vehicleAssign)
+        public async Task<ActionResult> UpdateVehicleAssign(int id, VehicleAssignWithoutVehicleDriverDto vehicleAssign)
         {
             if (!await _vehicleAssignInfoRepository.VehicleAssignExistsAsync(id))
             {
@@ -88,7 +93,7 @@ namespace CarFleetAPI.Controllers
         }
         [HttpPatch("{id}")]
         public async Task<ActionResult> PartiallyUpdateVehicleAssign(int id,
-            JsonPatchDocument<VehicleAssignDto> patchDocument)
+            JsonPatchDocument<VehicleAssignWithoutVehicleDriverDto> patchDocument)
         {
             if (!await _vehicleAssignInfoRepository.VehicleAssignExistsAsync(id))
             {
@@ -100,7 +105,7 @@ namespace CarFleetAPI.Controllers
                 return NotFound();
             }
 
-            var vehicleAssignToPatch = _mapper.Map<VehicleAssignDto>(vehicleAssignEntity);
+            var vehicleAssignToPatch = _mapper.Map<VehicleAssignWithoutVehicleDriverDto>(vehicleAssignEntity);
 
             patchDocument.ApplyTo(vehicleAssignToPatch, ModelState);
 

@@ -16,12 +16,14 @@ namespace CarFleetAPI.Entities
         public string? Description { get; set; }
 
         [ForeignKey("VehicleId")]
-        //public Vehicle? Vehicle { get; set; }
         public int VehicleId { get; set; }
+        public Vehicle Vehicle { get; set; }
+        
 
         [ForeignKey("DriverId")]
-        //public Driver? Driver { get; set; }
         public int DriverId { get; set; }
+        public Driver Driver { get; set; }
+        
 
         public VehicleAssign(string name)
         {

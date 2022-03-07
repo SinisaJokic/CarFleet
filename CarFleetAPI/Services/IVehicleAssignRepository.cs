@@ -13,5 +13,6 @@ namespace CarFleetAPI.Services
         Task AddVehicleAssignAsync(VehicleAssign vehicleAssign);
         void DeleteVehicleAssign(VehicleAssign vehicleAssign);
         Task<bool> SaveChangesAsync();
+        Task<bool> ExistsVehicleDriverDateAsync(int vehicleId,int driverID,DateTime dateTimeFrom, DateTime dateTimeTo);
     }
 }

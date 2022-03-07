@@ -15,6 +15,9 @@ namespace CarFleetModels
             public string Description { get; set; }
             public int VehicleId { get; set; }
             public int DriverId { get; set; }
+
+            public string? RegistrationNumber { get; set; }
+            public string? Driver { get; set; }
     }
     
 }
