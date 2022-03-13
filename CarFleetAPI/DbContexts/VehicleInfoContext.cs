@@ -10,6 +10,8 @@ namespace CarFleetAPI.DbContexts
         public DbSet<Driver> Drivers { get; set; } = null!;
         public DbSet<VehicleAssign> VehicleAssign { get; set; } = null!;
 
+        public DbSet<UserModel> Users { get; set; } = null!;
+
         public VehicleInfoContext(DbContextOptions<VehicleInfoContext> options)
             : base(options)
         {

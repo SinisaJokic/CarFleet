@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using CarFleetAPI.Models;
 using CarFleetAPI.Services;
-using CityInfo.API.Models;
+using CarFleetAPI.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarFleetAPI.Controllers
 {
@@ -24,12 +25,14 @@ namespace CarFleetAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "MustBeAdmin")]
         public async Task<ActionResult<IEnumerable<VehicleAssignDto>>> GetVehicleAssigns()
         {
             var vehicleAssignEntities = await _vehicleAssignInfoRepository.GetVehicleAssignAsync();
             return Ok(_mapper.Map<IEnumerable<VehicleAssignDto>>(vehicleAssignEntities));
         }
         [HttpGet("{id}", Name = "GetVehicleAssign")]
+        [Authorize(Policy = "MustBeAdmin")]
         public async Task<IActionResult> GetVehicleAssign(int id)
         {
             var vehicleAssign = await _vehicleAssignInfoRepository.GetVehicleAssignAsync(id);
@@ -42,6 +45,7 @@ namespace CarFleetAPI.Controllers
             return Ok(_mapper.Map<VehicleAssignDto>(vehicleAssign));
         }
         [HttpPost]
+        [Authorize(Policy = "MustBeAdmin")]
         public async Task<ActionResult<VehicleAssignDto>> CreateVehicleAssign(VehicleAssignWithoutVehicleDriverDto vehicleAssign)
         {
             //if (!await _vehicleInfoRepository.VehicleExistsAsync(Id))
@@ -72,6 +76,7 @@ namespace CarFleetAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Policy = "MustBeAdmin")]
         public async Task<ActionResult> UpdateVehicleAssign(int id, VehicleAssignWithoutVehicleDriverDto vehicleAssign)
         {
             if (!await _vehicleAssignInfoRepository.VehicleAssignExistsAsync(id))
@@ -92,6 +97,7 @@ namespace CarFleetAPI.Controllers
             return NoContent();
         }
         [HttpPatch("{id}")]
+        [Authorize(Policy = "MustBeAdmin")]
         public async Task<ActionResult> PartiallyUpdateVehicleAssign(int id,
             JsonPatchDocument<VehicleAssignWithoutVehicleDriverDto> patchDocument)
         {
@@ -125,6 +131,7 @@ namespace CarFleetAPI.Controllers
             return NoContent();
         }
         [HttpDelete("{id}")]
+        [Authorize(Policy = "MustBeAdmin")]
         public async Task<ActionResult> DeleteDriver( int id)
         {
             if (!await _vehicleAssignInfoRepository.VehicleAssignExistsAsync(id))

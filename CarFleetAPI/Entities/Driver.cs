@@ -14,6 +14,8 @@ namespace CarFleetAPI.Entities
         [Required]
         [MaxLength(50)]
         public string LastName { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime BirthDate { get; set; }
         public string? Street { get; set; }
         public string? City { get; set; }

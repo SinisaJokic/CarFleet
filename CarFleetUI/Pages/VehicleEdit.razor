@@ -2,6 +2,7 @@
 @page "/vehicleedit/{VehicleId}"
 @inherits VehicleEditBase
 @using CarFleetModels
+@*@attribute [Authorize(Policy  = "Editor")]*@
 
     <section class="employee-edit">
         @if (!Saved)

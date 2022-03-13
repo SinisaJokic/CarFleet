@@ -1,0 +1,55 @@
+﻿@page "/useroverview"
+@inherits UserOverviewBase
+
+<h1 class="page-title">All users</h1>
+
+<p>@Message</p>
+
+@if (Users == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                @*<th></th>*@
+                <th>User ID</th>
+                <th>User name</th>
+                <th>Password</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Roles</th>
+                <th>Actions</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Users)
+            {
+                <tr>
+                    @*<td><img width="30" src="/images/professional.png" class="rounded-circle" /></td>*@
+                    <td>@user.PkUser</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Password</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Roles</td>
+                    <td>
+                        @*<a href="@($"driveredit/{driver.Id}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-edit"></i>
+                        </a>*@
+                       @* <a href="@($"maps/{vehicle.Id}")" class="btn btn-success table-btn">
+                            <i class="far fa-eye"></i>
+                        </a>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@*<button @onclick="QuickAddEmployee" class="btn btn-dark table-btn quick-add-btn">&nbsp;&nbsp;+&nbsp;&nbsp;</button>
+
+<AddEmployeeDialog @ref="AddEmployeeDialog" CloseEventCallback="@AddEmployeeDialog_OnDialogClose"></AddEmployeeDialog>*@

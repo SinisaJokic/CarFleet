@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using CarFleetAPI.Models;
 using CarFleetAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarFleetAPI.Controllers
 {
     [ApiController]
+    [Authorize(Policy = "MustBeAdmin")]
     [Route("api/driver")]
     [Produces("application/json")]
     public class DriverController : ControllerBase

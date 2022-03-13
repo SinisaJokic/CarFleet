@@ -1,6 +1,6 @@
 ﻿using CarFleetAPI.Entities;
 
-namespace CityInfo.API.Models
+namespace CarFleetAPI.Models
 {
     public class VehicleAssignWithoutVehicleDriverDto
     {

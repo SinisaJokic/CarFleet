@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CityInfo.API.Models;
+using CarFleetAPI.Models;
 
 namespace CarFleetAPI.Profiles
 {

@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using CarFleetAPI.Models;
 using CarFleetAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarFleetAPI.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/vehicle")]
     [Produces("application/json")]
     public class VehicleController : ControllerBase
@@ -41,6 +43,7 @@ namespace CarFleetAPI.Controllers
             return Ok(_mapper.Map<VehicleDto>(vehicle));
         }
         [HttpPost]
+        [Authorize(Policy = "MustBeAdmin")]
         public async Task<ActionResult<VehicleDto>> CreateVehicle(VehicleDto vehicle)
         {
             //if (!await _vehicleInfoRepository.VehicleExistsAsync(Id))
@@ -66,6 +69,7 @@ namespace CarFleetAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Policy = "MustBeAdmin")]
         public async Task<ActionResult> UpdateVehicle(int id, VehicleDto vehicle)
         {
             if (!await _vehicleInfoRepository.VehicleExistsAsync(id))
@@ -119,6 +123,7 @@ namespace CarFleetAPI.Controllers
             return NoContent();
         }
         [HttpDelete("{id}")]
+        [Authorize(Policy = "MustBeAdmin")]
         public async Task<ActionResult> DeleteVehicle( int id)
         {
             if (!await _vehicleInfoRepository.VehicleExistsAsync(id))

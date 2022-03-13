@@ -8,17 +8,21 @@ namespace CarFleetUI.Services
     public class DriverService : IDriverService
     {
         private readonly HttpClient _httpClient;
+        private IHttpService _httpService;
 
-        public DriverService(HttpClient http)
+        public DriverService(HttpClient http, IHttpService httpService)
         {
             _httpClient = http;
+            _httpService = httpService;
+
         }
         
 
         public async Task<List<Driver>> GetAllDriver()
         {
             //var vehicles = await _httpClient.GetFromJsonAsync<List<Vehicle>>($"api/vehicle");
-            return (await _httpClient.GetFromJsonAsync<List<Driver>>($"api/driver"));
+            //return (await _httpClient.GetFromJsonAsync<List<Driver>>($"api/driver"));  zadnje
+            return await _httpService.GetAll<Driver>("https://localhost:7228/api/driver");
 
             //var vehicles = await _httpClient.GetStreamAsync($"api/vehicle");
 
@@ -27,10 +31,10 @@ namespace CarFleetUI.Services
             //return await JsonSerializer.DeserializeAsync<IEnumerable<Vehicle>>
             //    (await _httpClient.GetStreamAsync($"api/vehicle"), new JsonSerializerOptions() { PropertyNameCaseInsensitive=true});
 
-        //    return await JsonSerializer.DeserializeAsync<IEnumerable<Employee>>
-        //        (await _httpClient.GetStreamAsync($"api/employee"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-        //
-       }
+            //    return await JsonSerializer.DeserializeAsync<IEnumerable<Employee>>
+            //        (await _httpClient.GetStreamAsync($"api/employee"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            //
+        }
         public async Task<Driver> GetDriverDetails(int driverId)
         {
             return await JsonSerializer.DeserializeAsync<Driver>
