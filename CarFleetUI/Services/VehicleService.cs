@@ -48,8 +48,10 @@ namespace CarFleetUI.Services
         }
     public async Task<Vehicle> GetVehicleDetails(int vehicleId)
         {
-            return await JsonSerializer.DeserializeAsync<Vehicle>
-                (await _httpClient.GetStreamAsync($"api/vehicle/{vehicleId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            //return await JsonSerializer.DeserializeAsync<Vehicle>
+            //    (await _httpClient.GetStreamAsync($"api/vehicle/{vehicleId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+            return await _httpService.Get<Vehicle>($"https://localhost:7228/api/vehicle/{vehicleId}");
         }
 
         public async Task<Vehicle> AddVehicle(Vehicle vehicle)
@@ -72,10 +74,14 @@ namespace CarFleetUI.Services
 
         public async Task UpdateVehicle(Vehicle vehicle)
         {
-            var vehicleJson =
-                new StringContent(JsonSerializer.Serialize(vehicle), Encoding.UTF8, "application/json");
+            //var vehicleJson =
+            //    new StringContent(JsonSerializer.Serialize(vehicle), Encoding.UTF8, "application/json");
 
-            await _httpClient.PutAsync("api/vehicle", vehicleJson);
+            //await _httpClient.PutAsync("api/vehicle", vehicleJson);
+
+            int vehicleId=vehicle.Id;
+
+            await _httpService.Put($"https://localhost:7228/api/vehicle/{vehicleId}", vehicle);
         }
 
         public async Task DeleteVehicle(int vehicleId)

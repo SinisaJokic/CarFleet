@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CarFleetAPI.Controllers
 {
     [ApiController]
-    [Authorize(Policy = "MustBeAdmin")]
+    [Authorize(Policy = "EditorAdmin")]
     [Route("api/driver")]
     [Produces("application/json")]
     public class DriverController : ControllerBase

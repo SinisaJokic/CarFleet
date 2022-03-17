@@ -11,7 +11,9 @@ namespace CarFleetAPI.Entities
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime FromDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime ToDate { get; set; }
         public string? Description { get; set; }
 

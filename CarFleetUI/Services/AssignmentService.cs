@@ -36,23 +36,25 @@ namespace CarFleetUI.Services
         }
         public async Task<VehicleAssign> GetVehicleAssignDetails(int vehicleassignId)
         {
-            return await JsonSerializer.DeserializeAsync<VehicleAssign>
-                (await _httpClient.GetStreamAsync($"api/vehicleassign/{vehicleassignId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            //return await JsonSerializer.DeserializeAsync<VehicleAssign>
+            //    (await _httpClient.GetStreamAsync($"api/vehicleassign/{vehicleassignId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            return await _httpService.Get<VehicleAssign>($"https://localhost:7228/api/vehicleassign/{vehicleassignId}");
         }
 
         public async Task<VehicleAssign> AddVehicleAssign(VehicleAssign vehicleAssign)
         {
-            var vehicleAssignJson =
-                new StringContent(JsonSerializer.Serialize(vehicleAssign), Encoding.UTF8, "application/json");
+            //var vehicleAssignJson =
+            //    new StringContent(JsonSerializer.Serialize(vehicleAssign), Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("api/vehicleassign", vehicleAssignJson);
+            //var response = await _httpClient.PostAsync("api/vehicleassign", vehicleAssignJson);
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await JsonSerializer.DeserializeAsync<VehicleAssign>(await response.Content.ReadAsStreamAsync());
-            }
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    return await JsonSerializer.DeserializeAsync<VehicleAssign>(await response.Content.ReadAsStreamAsync());
+            //}
 
-                return null;
+            //    return null;
+            return await _httpService.Post<VehicleAssign>("https://localhost:7228/api/vehicleassign", vehicleAssign);
         }
 
         public async Task UpdateVehicleAssign(VehicleAssign vehicleAssign)

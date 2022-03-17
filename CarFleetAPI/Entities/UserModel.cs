@@ -8,11 +8,15 @@ namespace CarFleetAPI.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PkUser { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string FirstName { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string LastName { get; set; }
         public string? UserName { get; set; }
         public string? Email { get; set; }
-        public string Password { get; set; }
+        public string? Password { get; set; }
         public string? AccessToken { get; set; }
         public string? Roles { get; set; }
         public bool? IsAuthenticated { get; set; }

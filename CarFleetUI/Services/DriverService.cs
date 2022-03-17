@@ -37,31 +37,37 @@ namespace CarFleetUI.Services
         }
         public async Task<Driver> GetDriverDetails(int driverId)
         {
-            return await JsonSerializer.DeserializeAsync<Driver>
-                (await _httpClient.GetStreamAsync($"api/driver/{driverId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            //return await JsonSerializer.DeserializeAsync<Driver>
+            //    (await _httpClient.GetStreamAsync($"api/driver/{driverId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            return await _httpService.Get<Driver>($"https://localhost:7228/api/driver/{driverId}");
         }
 
         public async Task<Driver> AddDriver(Driver driver)
         {
-            var driverJson =
-                new StringContent(JsonSerializer.Serialize(driver), Encoding.UTF8, "application/json");
+            //var driverJson =
+            //    new StringContent(JsonSerializer.Serialize(driver), Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("api/driver", driverJson);
+            //var response = await _httpClient.PostAsync("api/driver", driverJson);
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await JsonSerializer.DeserializeAsync<Driver>(await response.Content.ReadAsStreamAsync());
-            }
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    return await JsonSerializer.DeserializeAsync<Driver>(await response.Content.ReadAsStreamAsync());
+            //}
 
-            return null;
+            //return null;
+            return await _httpService.Post<Driver>("https://localhost:7228/api/driver", driver);
         }
 
         public async Task UpdateDriver(Driver driver)
         {
-            var driverJson =
-                new StringContent(JsonSerializer.Serialize(driver), Encoding.UTF8, "application/json");
+            //var driverJson =
+            //    new StringContent(JsonSerializer.Serialize(driver), Encoding.UTF8, "application/json");
 
-            await _httpClient.PutAsync("api/driver", driverJson);
+            //await _httpClient.PutAsync("api/driver", driverJson);
+
+            int driverId = driver.Id;
+
+            await _httpService.Put($"https://localhost:7228/api/vehicle/{driverId}", driver);
         }
 
         public async Task DeleteDriver(int driverId)

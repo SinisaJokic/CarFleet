@@ -94,8 +94,8 @@ else
                     <td>@vehicleassign.Id</td>
                     <td>@vehicleassign.RegistrationNumber</td>
                     <td>@vehicleassign.Driver</td>
-                    <td>@vehicleassign.FromDate.ToShortDateString()</td>
-                    <td>@vehicleassign.ToDate.ToShortDateString()</td>
+                    <td>@vehicleassign.FromDate.ToString("dd.MM.yyyy")</td>
+                    <td>@vehicleassign.ToDate.ToString("dd.MM.yyyy")</td>
                     <td>@vehicleassign.Name</td>
                     <td>
                         @*<a href="@($"driveredit/{driver.Id}")" class="btn btn-primary table-btn">

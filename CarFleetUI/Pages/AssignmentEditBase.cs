@@ -50,21 +50,22 @@ namespace CarFleetUI.Pages
                 if (addedVehicleAssign != null)
                 {
                     StatusClass = "alert-success";
-                    Message = "New vehicle added successfully.";
+                    Message = "New assignment added successfully.";
                     Saved = true;
                 }
                 else
                 {
                     StatusClass = "alert-danger";
-                    Message = "Something went wrong adding the new vehicle. Please try again.";
+                    Message = "Something went wrong adding the new assignment. Please try again.";
                     Saved = false;
+                    //StateHasChanged();
                 }
             }
             else
             {
                 await AssignmentService.UpdateVehicleAssign(VehicleAssign);
                 StatusClass = "alert-success";
-                Message = "Vehicle updated successfully.";
+                Message = "Assignment updated successfully.";
                 Saved = true;
             }
         }

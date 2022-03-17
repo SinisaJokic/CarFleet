@@ -123,7 +123,7 @@ namespace CarFleetAPI.Controllers
             return NoContent();
         }
         [HttpDelete("{id}")]
-        [Authorize(Policy = "MustBeAdmin")]
+        [Authorize(Policy = "EditorAdmin")]
         public async Task<ActionResult> DeleteVehicle( int id)
         {
             if (!await _vehicleInfoRepository.VehicleExistsAsync(id))

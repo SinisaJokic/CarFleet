@@ -35,12 +35,10 @@ namespace CarFleetAPI.API.Controllers
         {
             if (userData != null && userData.UserName != null && userData.Password != null)
             {
-                //var usertemp =  _userModelInfoRepository.GetUserPassAsync(userData.UserName, userData.Password);
-                //var user = _mapper.Map<Models.UserModelDto>(usertemp);
+                var usertemp = _userModelInfoRepository.GetUserPassAsync(userData.UserName, userData.Password);
+                UserModelDto user = _mapper.Map<UserModelDto>(usertemp.Result);
 
-                var user = GetUser(userData.UserName, userData.Password);
-
-                
+                //var user = GetUser(userData.UserName, userData.Password);
 
                 if (user == null)
                 {

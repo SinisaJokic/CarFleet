@@ -109,13 +109,19 @@ builder.Services.AddAuthorization(options =>
         policy.RequireAuthenticatedUser();
         policy.RequireClaim("Roles", "Viewer");
     });
-    options.AddPolicy("Editor", policy =>
+    options.AddPolicy("EditorAdmin", policy =>
     {
         policy.RequireAuthenticatedUser();
         policy.RequireClaim("Roles", "Editor");
+              //.RequireClaim("Roles", "Administrator");
     });
 });
 
+options.AddPolicy("LimitedOrFull", policy =>
+    policy.RequireAssertion(context =>
+        context.User.HasClaim(c =>
+            (c.Type == "Limited" ||
+             c.Type == "Full"))));
 
 
 var app = builder.Build();

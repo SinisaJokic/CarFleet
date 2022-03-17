@@ -52,11 +52,17 @@ namespace CarFleetAPI.Controllers
             //{
             //    return NotFound();
             //}
-            //if (await _vehicleAssignInfoRepository.ExistsVehicleDriverDateAsync(vehicleAssign.VehicleId,vehicleAssign.DriverId,
-            //        vehicleAssign.FromDate,vehicleAssign.ToDate))
-            //{
-            //    return NotFound();
-            //}
+            if (await _vehicleAssignInfoRepository.ExistsVehicleDateAsync(vehicleAssign.VehicleId, 
+                vehicleAssign.FromDate, vehicleAssign.ToDate))
+            {
+                return ValidationProblem();
+            }
+
+            if (await _vehicleAssignInfoRepository.ExistsDriverDateAsync(vehicleAssign.DriverId,
+                    vehicleAssign.FromDate, vehicleAssign.ToDate))
+            {
+                return ValidationProblem();
+            }
 
             var finalVehicalAssign = _mapper.Map<Entities.VehicleAssign>(vehicleAssign);
 

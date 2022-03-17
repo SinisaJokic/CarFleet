@@ -37,13 +37,13 @@ namespace CarFleetUI.Pages
                 if (addedDriver != null)
                 {
                     StatusClass = "alert-success";
-                    Message = "New vehicle added successfully.";
+                    Message = "New driver added successfully.";
                     Saved = true;
                 }
                 else
                 {
                     StatusClass = "alert-danger";
-                    Message = "Something went wrong adding the new vehicle. Please try again.";
+                    Message = "Something went wrong adding the new driver. Please try again.";
                     Saved = false;
                 }
             }
@@ -51,7 +51,7 @@ namespace CarFleetUI.Pages
             {
                 await DriverService.UpdateDriver(Driver);
                 StatusClass = "alert-success";
-                Message = "Vehicle updated successfully.";
+                Message = "Driver updated successfully.";
                 Saved = true;
             }
         }
