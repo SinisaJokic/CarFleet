@@ -25,12 +25,14 @@ namespace CarFleetAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "OnlyView")]
         public async Task<ActionResult<IEnumerable<VehicleDto>>> GetVehicles()
         {
             var vehicleEntities = await _vehicleInfoRepository.GetVehiclesAsync();
             return Ok(_mapper.Map<IEnumerable<VehicleDto>>(vehicleEntities));
         }
         [HttpGet("{id}", Name = "GetVehicle")]
+        [Authorize(Policy = "OnlyView")]
         public async Task<IActionResult> GetVehicle(int id)
         {
             var vehicle = await _vehicleInfoRepository.GetVehicleAsync(id);
@@ -43,7 +45,7 @@ namespace CarFleetAPI.Controllers
             return Ok(_mapper.Map<VehicleDto>(vehicle));
         }
         [HttpPost]
-        [Authorize(Policy = "MustBeAdmin")]
+        [Authorize(Policy = "EditorAdmin")]
         public async Task<ActionResult<VehicleDto>> CreateVehicle(VehicleDto vehicle)
         {
             //if (!await _vehicleInfoRepository.VehicleExistsAsync(Id))
@@ -69,7 +71,7 @@ namespace CarFleetAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Policy = "MustBeAdmin")]
+        [Authorize(Policy = "EditorAdmin")]
         public async Task<ActionResult> UpdateVehicle(int id, VehicleDto vehicle)
         {
             if (!await _vehicleInfoRepository.VehicleExistsAsync(id))

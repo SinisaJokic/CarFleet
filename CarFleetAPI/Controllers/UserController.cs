@@ -9,7 +9,6 @@ namespace CarFleetAPI.Controllers
 {
     [ApiController]
     [Route("api/user")]
-    [Authorize(Policy = "MustBeAdmin")]
     [Produces("application/json")]
     public class UserController : ControllerBase
     {
@@ -25,12 +24,14 @@ namespace CarFleetAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "EditorAdmin")]
         public async Task<ActionResult<IEnumerable<UserModelDto>>> GetUserModels()
         {
             var userModelsEntities = await _userModelInfoRepository.GetUserModelsAsync();
             return Ok(_mapper.Map<IEnumerable<UserModelDto>>(userModelsEntities));
         }
         [HttpGet("{pkUser}", Name = "GetUserModel")]
+        [Authorize(Policy = "EditorAdmin")]
         public async Task<IActionResult> GetUserModel(int pkUser)
         {
             var userModel = await _userModelInfoRepository.GetUserModelAsync(pkUser);
@@ -43,6 +44,7 @@ namespace CarFleetAPI.Controllers
             return Ok(_mapper.Map<UserModelDto>(userModel));
         }
         [HttpPost]
+        [Authorize(Policy = "MustBeAdmin")]
         public async Task<ActionResult<UserModelDto>> CreateDriver(UserModelDto userModule)
         {
             //if (!await _vehicleInfoRepository.VehicleExistsAsync(Id))
@@ -68,6 +70,7 @@ namespace CarFleetAPI.Controllers
         }
 
         [HttpPut("{pkUser}")]
+        [Authorize(Policy = "MustBeAdmin")]
         public async Task<ActionResult> UpdateDriver(int pkUser, UserModelDto userModule)
         {
             if (!await _userModelInfoRepository.UserModelExistsAsync(pkUser))
@@ -121,6 +124,7 @@ namespace CarFleetAPI.Controllers
             return NoContent();
         }
         [HttpDelete("{pkUser}")]
+        [Authorize(Policy = "MustBeAdmin")]
         public async Task<ActionResult> DeleteDriver( int pkUser)
         {
             if (!await _userModelInfoRepository.UserModelExistsAsync(pkUser))

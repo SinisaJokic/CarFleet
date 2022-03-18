@@ -38,31 +38,36 @@ namespace CarFleetUI.Services
         }
         public async Task<UserModel> GetUserDetails(int pkUser)
         {
-            return await JsonSerializer.DeserializeAsync<UserModel>
-                (await _httpClient.GetStreamAsync($"api/user/{pkUser}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            //return await JsonSerializer.DeserializeAsync<UserModel>
+            //    (await _httpClient.GetStreamAsync($"api/user/{pkUser}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            return await _httpService.Get<UserModel>($"https://localhost:7228/api/user/{pkUser}");
         }
 
         public async Task<UserModel> AddUser(UserModel userModel)
         {
-            var userModelJson =
-                new StringContent(JsonSerializer.Serialize(userModel), Encoding.UTF8, "application/json");
+            //var userModelJson =
+            //    new StringContent(JsonSerializer.Serialize(userModel), Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("api/user", userModelJson);
+            //var response = await _httpClient.PostAsync("api/user", userModelJson);
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await JsonSerializer.DeserializeAsync<UserModel>(await response.Content.ReadAsStreamAsync());
-            }
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    return await JsonSerializer.DeserializeAsync<UserModel>(await response.Content.ReadAsStreamAsync());
+            //}
 
-            return null;
+            //return null;
+            return await _httpService.Post<UserModel>("https://localhost:7228/api/user", userModel);
         }
 
         public async Task UpdateUser(UserModel userModel)
         {
-            var userModelJson =
-                new StringContent(JsonSerializer.Serialize(userModel), Encoding.UTF8, "application/json");
+            //var userModelJson =
+            //    new StringContent(JsonSerializer.Serialize(userModel), Encoding.UTF8, "application/json");
 
-            await _httpClient.PutAsync("api/user", userModelJson);
+            //await _httpClient.PutAsync("api/user", userModelJson);
+            int userModelPkUser = userModel.PkUser;
+
+            await _httpService.Put($"https://localhost:7228/api/user/{userModelPkUser}", userModel);
         }
 
         public async Task DeleteUser(int pkUser)

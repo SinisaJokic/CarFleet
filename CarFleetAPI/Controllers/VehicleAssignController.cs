@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace CarFleetAPI.Controllers
 {
     [ApiController]
+    [Authorize(Policy = "EditorAdmin")]
     [Route("api/vehicleAssign")]
     [Produces("application/json")]
     public class VehicleAssignController : ControllerBase
@@ -45,7 +46,7 @@ namespace CarFleetAPI.Controllers
             return Ok(_mapper.Map<VehicleAssignDto>(vehicleAssign));
         }
         [HttpPost]
-        [Authorize(Policy = "MustBeAdmin")]
+        [Authorize(Policy = "EditorAdmin")]
         public async Task<ActionResult<VehicleAssignDto>> CreateVehicleAssign(VehicleAssignWithoutVehicleDriverDto vehicleAssign)
         {
             //if (!await _vehicleInfoRepository.VehicleExistsAsync(Id))
@@ -82,7 +83,7 @@ namespace CarFleetAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Policy = "MustBeAdmin")]
+        [Authorize(Policy = "EditorAdmin")]
         public async Task<ActionResult> UpdateVehicleAssign(int id, VehicleAssignWithoutVehicleDriverDto vehicleAssign)
         {
             if (!await _vehicleAssignInfoRepository.VehicleAssignExistsAsync(id))
@@ -137,7 +138,7 @@ namespace CarFleetAPI.Controllers
             return NoContent();
         }
         [HttpDelete("{id}")]
-        [Authorize(Policy = "MustBeAdmin")]
+        [Authorize(Policy = "EditorAdmin")]
         public async Task<ActionResult> DeleteDriver( int id)
         {
             if (!await _vehicleAssignInfoRepository.VehicleAssignExistsAsync(id))

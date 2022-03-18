@@ -107,22 +107,15 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("OnlyView", policy =>
     {
         policy.RequireAuthenticatedUser();
-        policy.RequireClaim("Roles", "Viewer");
+        policy.RequireClaim("Roles", "Viewer", "Editor", "Administrator");
     });
     options.AddPolicy("EditorAdmin", policy =>
     {
         policy.RequireAuthenticatedUser();
-        policy.RequireClaim("Roles", "Editor");
-              //.RequireClaim("Roles", "Administrator");
+        policy.RequireClaim("Roles", "Editor", "Administrator");
+            //.RequireClaim("Roles", "Administrator");
     });
 });
-
-options.AddPolicy("LimitedOrFull", policy =>
-    policy.RequireAssertion(context =>
-        context.User.HasClaim(c =>
-            (c.Type == "Limited" ||
-             c.Type == "Full"))));
-
 
 var app = builder.Build();
 

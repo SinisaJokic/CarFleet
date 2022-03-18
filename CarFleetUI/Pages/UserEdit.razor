@@ -1,0 +1,72 @@
+﻿@page "/useredit"
+@page "/useredit/{UserId}"
+@inherits UserEditBase
+@using CarFleetModels
+
+    <section class="employee-edit">
+        @if (!Saved)
+        {
+            <h1 class="page-title">Details</h1>
+
+            <br>
+            <EditForm Model="@UserModel" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+                <ObjectGraphDataAnnotationsValidator />
+
+                <div class="form-group row">
+                    <label for="firstName" class="col-sm-3">First name: </label>
+                    <InputText id="firstName" class="form-control col-sm-8" @bind-Value="@UserModel.FirstName" placeholder="Enter first name"></InputText>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => UserModel.FirstName)" />
+                </div>
+                <div class="form-group row">
+                    <label for="lastName" class="col-sm-3">Last name: </label>
+                    <InputText id="lastName" class="form-control col-sm-8" @bind-Value="@UserModel.LastName" placeholder="Enter last name"></InputText>
+                    <ValidationMessage For="@(() => UserModel.LastName)" />
+                </div>
+                <div class="form-group row">
+                    <label for="userName" class="col-sm-3">User name: </label>
+                    <InputText id="userName" class="form-control col-sm-8" @bind-Value="@UserModel.UserName" placeholder="Enter user name"></InputText>
+                    <ValidationMessage For="@(() => UserModel.UserName)" />
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3">Email: </label>
+                    <InputText id="email" class="form-control col-sm-8" @bind-Value="@UserModel.Email" placeholder="Enter email"></InputText>
+                    <ValidationMessage For="@(() => UserModel.Email)" />
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-sm-3">Password: </label>
+                    <InputText id="password" class="form-control col-sm-8" @bind-Value="@UserModel.Password" placeholder="Enter password"></InputText>
+                    <ValidationMessage For="@(() => UserModel.Password)" />
+                </div>
+                @*<div class="form-group row">
+                    <label for="roles" class="col-sm-3">Roles: </label>
+                    <InputText id="roles" class="form-control col-sm-8" @bind-Value="@UserModel.Roles" placeholder="Enter roles"></InputText>
+                    <ValidationMessage For="@(() => UserModel.Roles)" />
+                </div>*@
+                <div class="form-group row">
+                <label for="roles" class="col-sm-3">Roles: </label>
+                <InputSelect id="roles" class="form-control col-sm-8" @bind-Value=@UserModel.Roles>
+                    <option value="@(Roles.Administrator)">Administrator</option>
+                    <option value="@(Roles.Viewer)">Viewer</option>
+                    <option value="@(Roles.Editor)">Editor</option>
+                </InputSelect>
+                </div>
+                <br>
+                
+                <button type="submit" class="btn btn-primary edit-btn">Save user</button>
+                @*<a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToOverview">Cancel</a>*@
+                @if (UserModel.PkUser > 0)
+                {
+                    <a class="btn btn-danger" @onclick="@DeleteUser">
+                        Delete
+                    </a>
+                }
+            </EditForm>
+
+        }
+        else
+        {
+            <div class="alert @StatusClass">@Message</div>
+            @*<a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>*@
+
+        }
+    </section>
